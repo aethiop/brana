@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+html,
+* {
+	font-family: "Space Mono", monospace;
+}
+
+[contenteditable]:focus {
+	outline: none;
+}
+
+p:empty:not(:focus)::before {
+	content: attr(data-placeholder);
+}
+.meta-on,
+div:hover,
+ul:hover,
+ol:hover,
+li:hover,
+p:hover,
+span:hover,
+form:hover,
+button:hover,
+input:hover,
+textarea:hover,
+img:hover {
+	outline: 1px solid;
+	animation: meta-on 3s infinite;
+	transition: ease;
+}
+@keyframes meta-on {
+	0% {
+		outline-color: magenta;
+	}
+	33% {
+		outline-color: cyan;
+	}
+	66% {
+		outline-color: yellow;
+	}
+	100% {
+		outline-color: magenta;
+	}
+}
