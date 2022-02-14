@@ -170,16 +170,13 @@
 					gui = at.gun || at.$,
 					ui = name,
 					back;
-				console.log("MODEL: ", gui._.id);
 				if (model) {
 					ui = model.has[gui._.id];
 					console.log("UI: ", ui);
 					if (!ui) {
 						back = gui.back(many - 1);
-						console.log("BACK: ", back);
 						ui = model.has[back._.id];
 						if (!ui) {
-							console.log("no ui");
 							if (!back._.get) {
 								return;
 							}
@@ -266,75 +263,8 @@
 	$.as = as;
 })();
 
-(function () {
-	$(document).on("click", "a, button", function (e) {
-		var tmp = $(this).attr("href") || "";
-		if (0 === tmp.indexOf("http")) {
-			return;
-		}
-		e.preventDefault();
-		r(tmp);
-	});
-	function r(href) {
-		console.log(href);
-		if (!href) {
-			return;
-		}
-		if (href[0] == "#") {
-			href = href.slice(1);
-		}
-		var h = href.split("/")[0];
-		$(".hash").hide();
-		$("#" + h).show();
-		if (r.on === h) {
-			return;
-		}
-		location.hash = href;
-		(r.page[h] || { on: function () {} }).on();
-		r.on = h;
-		return r;
-	}
-	r.page = function (h, cb) {
-		r.page[h] = r.page[h] || { on: cb };
-		return r;
-	};
-	r.render = function (id, model, onto, data) {
-		console.log("render: ", id, model, onto, data);
-		var $data = $(
-			$("#" + id).get(0) ||
-				$(".model")
-					.find(model)
-					.clone(true)
-					.attr("id", id)
-					.appendTo(onto)
-		);
-		console.log($(".model").find(model));
-		$.each(data, function (field, val) {
-			if ($.isPlainObject(val)) {
-				return;
-			}
-			$data
-				.find("[name='" + field + "']")
-				.val(val)
-				.text(val);
-		});
-		console.log("render: ", $data);
-		return $data;
-	};
-
-	window.onhashchange = function () {
-		r(location.hash.slice(1));
-	};
-	$.as && ($.as.route = r);
-	if (window.as) {
-		as.route = r;
-	} else {
-		$.route = r;
-	}
-})();
-
 $(function () {
-	$(".hash").not(":first").hide();
+	$(".page").not(":first").hide();
 	$.as.route(location.hash.slice(1));
 	$(
 		(JOY.start =

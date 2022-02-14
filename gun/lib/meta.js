@@ -223,6 +223,12 @@
 			k.at == m.edit ? m.flip(false) : m.check("down", "back");
 		}
 		var defaults = {
+			76: {
+				down: function () {
+					m.flip(false);
+					console.log("UP");
+				},
+			},
 			8: { on: back }, // backspace
 			27: { up: k.wipe }, // esc: close and reset menu
 		};
@@ -251,8 +257,9 @@
 			},
 		};
 		var $m = $("<div>").attr("id", "meta");
-		//$m.append($('<span>').html('&#9776;').addClass('meta-start'));
+		// $m.append($("<span>").html("&#9776;").addClass("meta-start"));
 		$m.append($("<span>").html("+").addClass("meta-start"));
+		$m.attr("meta ");
 		$m.append($("<div>").addClass("meta-menu meta-none").append("<ul>"));
 		$m.on("mouseenter", function () {
 			if (meta.flip.active || meta.flip.is()) return;
@@ -340,7 +347,6 @@
 			});
 			var tag = document.createElement("style");
 			tag.innerHTML = tmp;
-			console.log(tag);
 			$m.append(tag);
 		}
 		meta.ui.iniline = function (el, cssObj) {
@@ -352,8 +358,6 @@
 	USE(function (module) {
 		var m = meta,
 			k = m.key;
-		console.log("meta.key", k);
-		console.log("meta.key.meta", k.meta);
 		$(document).on("mousedown mousemove mouseup", function (eve) {
 			m.tap.eve = eve;
 			m.tap.x = eve.pageX || 0;

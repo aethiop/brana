@@ -11,6 +11,11 @@ html,
 p:empty:not(:focus)::before {
 	content: attr(data-placeholder);
 }
+.make-first-letter::first-letter {
+	font-size: 300%;
+	margin-top: -1rem;
+	float: left;
+}
 .meta-on,
 div:hover,
 ul:hover,

@@ -58,7 +58,7 @@ textarea {
 
 ul,
 li {
-	list-style: none;
+	list-style: circle;
 }
 
 p {
@@ -207,10 +207,10 @@ p + p {
 	background: #d3a438;
 }
 .black {
-	background: black;
+	background: #121212;
 }
 .white {
-	background: white;
+	background: #f9fbff;
 }
 
 .shade {
